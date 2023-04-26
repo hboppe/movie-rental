@@ -7,13 +7,16 @@ import { TMovie } from "../../interfaces/movies.interfaces"
 
 const ensureMovieNameIsUnique = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   
-  const moviesRepo: Repository<TMovie> = AppDataSource.getRepository(Movie);
+    const moviesRepo: Repository<TMovie> = AppDataSource.getRepository(Movie);
 
-  const foundMovie = await moviesRepo.findBy({
-    name: req.body.name
-  });
+    const foundMovie = await moviesRepo.findBy({
+      name: req.body.name
+    });
 
-  if(!foundMovie.length) throw new AppError('Movie already exists.', 409);
+    if(foundMovie.length > 0){
+  
+      throw new AppError('Movie already exists.', 409); 
+    }
 
   return next()
 }

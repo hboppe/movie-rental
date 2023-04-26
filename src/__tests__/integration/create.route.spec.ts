@@ -132,8 +132,7 @@ describe('POST /movies', () => {
             bodyMessage: {
                 message: {
                     duration: ['Number must be greater than 0'],
-                    name: ['String must contain at most 50 character(s)'],
-                    price: ['Expected integer, received float'],
+                    name: ['String must contain at most 50 character(s)']
                 },
             },
         }

@@ -3,12 +3,12 @@ import { moviesMiddlewares } from "../middlewares/movies";
 import { moviesSchemaRequest } from "../schemas/movies.schema";
 import { moviesControllers } from '../controllers/movies/index';
 
-const moviesRouter = Router();
+const moviesRouter: Router = Router();
 
 moviesRouter.post(
   '',
-  moviesMiddlewares.ensureDataIsValid(moviesSchemaRequest),
   moviesMiddlewares.ensureMovieNameIsUnique,
+  moviesMiddlewares.ensureDataIsValid(moviesSchemaRequest),
   moviesControllers.createMovie
 )
 

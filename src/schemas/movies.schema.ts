@@ -2,10 +2,10 @@ import { z } from "zod";
 
 const moviesSchema = z.object({
   id: z.number(),
-  name: z.string().max(50, {message: 'Must be 50 or fewer characters long'}),
+  name: z.string().max(50),
   description: z.string().nullish(),
-  duration: z.number(),
-  price: z.number()
+  duration: z.number().gt(0),
+  price: z.number().gt(0)
 })
 
 const moviesSchemaRequest = moviesSchema.omit({
