@@ -12,4 +12,9 @@ moviesRouter.post(
   moviesControllers.createMovie
 )
 
+moviesRouter.get(
+  '',
+  moviesControllers.getAllMovies
+)
+
 export default moviesRouter
