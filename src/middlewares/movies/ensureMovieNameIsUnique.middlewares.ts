@@ -9,9 +9,13 @@ const ensureMovieNameIsUnique = async (req: Request, res: Response, next: NextFu
   
   const moviesRepo: Repository<TMovie> = AppDataSource.getRepository(Movie);
 
+  if(!req.body.name) return next();
+
   const foundMovie = await moviesRepo.findOneBy({
     name: req.body.name
   });
+
+  console.log(req.body.name, foundMovie)
 
   if(foundMovie !== null) throw new AppError('Movie already exists.', 409); 
   

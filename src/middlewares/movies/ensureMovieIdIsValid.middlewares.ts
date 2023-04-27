@@ -10,11 +10,14 @@ const ensureMovieIdIsValid = async (req: Request, res: Response, next: NextFunct
 
   const movieRepo: Repository<TMovie> = AppDataSource.getRepository(Movie);
 
+
   const foundMovie: TMovie | null = await movieRepo.findOneBy({
     id: movieId
   })
 
-  if(!foundMovie) throw new AppError('Movie not found', 409);
+  console.log(foundMovie)
+
+  if(!foundMovie) throw new AppError('Movie not found', 404);
 
   return next();
 }
