@@ -6,13 +6,16 @@ const moviesSchema = z.object({
   description: z.string().nullish(),
   duration: z.number().gt(0),
   price: z.number().gt(0)
-})
+});
 
 const moviesSchemaRequest = moviesSchema.omit({
   id: true
-})
+});
+
+const updateMovieRequest = moviesSchemaRequest.partial();
 
 export {
   moviesSchemaRequest,
-  moviesSchema
+  moviesSchema,
+  updateMovieRequest
 }

@@ -6,6 +6,7 @@ import { TMovie } from "../../interfaces/movies.interfaces";
 const getAllMovies = async (queryParams: any) => {
 
   let {page, perPage, order, sort} = queryParams;
+  let orders = queryParams.order;
 
   page = Number(page);
   perPage = Number(perPage);
@@ -19,15 +20,18 @@ const getAllMovies = async (queryParams: any) => {
   const moviesRepo: Repository<TMovie> = AppDataSource.getRepository(Movie);
 
   const skipNMovies = (page - 1) * perPage;
-
+  
+  const orderObj = {
+    [sort]: order.toUpperCase()
+  }
+  
   const allMovies = await moviesRepo.findAndCount({
     skip: skipNMovies,
     take: perPage,
-    order: {
-      [sort]: [order]
-    }
+    order: orderObj 
   });
-
+  
+  console.log(skipNMovies, perPage, `sort`, sort, `order`, order, allMovies)
   return {
     prevPage: 
       skipNMovies > 0 ? 
