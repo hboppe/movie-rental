@@ -11,16 +11,12 @@ const updateMovie = async (movieId: number, updateData: TUpdateMovieRequest): Pr
     id: movieId
   });
   
-  console.log(`ANTIGO`, oldDataMovie)
-
   const updatedMovie: TMovie =  movieRepo.create({
     ...oldDataMovie, 
     ...updateData
   } as TMovie)
 
   await movieRepo.save(updatedMovie)
-
-  console.log(`NOVO`, updatedMovie)
 
   return updatedMovie;
 }

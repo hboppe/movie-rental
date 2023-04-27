@@ -25,4 +25,10 @@ moviesRouter.patch(
   moviesControllers.updateMovie
 )
 
+moviesRouter.delete(
+  '/:id',
+  moviesMiddlewares.ensureMovieIdIsValid,
+  moviesControllers.deleteMovie
+)
+
 export default moviesRouter
